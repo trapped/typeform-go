@@ -10,6 +10,7 @@ import (
 )
 
 const (
+	resourceUserSelf   = "me"
 	resourceForms      = "forms"
 	resourceImages     = "images"
 	resourceThemes     = "themes"
@@ -21,6 +22,9 @@ type resource struct {
 }
 
 func getPath(resourceName, resourceID string) string {
+	if resourceID == "" {
+		return fmt.Sprintf("/%s", resourceName)
+	}
 	return fmt.Sprintf("/%s/%s", resourceName, resourceID)
 }
 

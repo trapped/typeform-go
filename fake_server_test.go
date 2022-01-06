@@ -34,6 +34,8 @@ const (
 	workspaceIDDeletedWorkspace   = "deletedWorkspaceID"
 	workspaceIDUpdatedWorkspace   = "updatedWorkspaceID"
 
+	userIDRetrievedUserSelf = "01E4459QMVBZ3HZ6S2TYPGV3Q4"
+
 	responsePayloadNotFound     = `{"code":"%s_NOT_FOUND","description":"Non existing %s with uid %s"}`
 	responsePayloadUnauthorized = `{"code":"AUTHENTICATION_FAILED","description":"Authentication credentials not found on the Request Headers"}`
 )
@@ -65,6 +67,9 @@ func newFakeTypeformServer() *typeformServer {
 	// 'results API' endpoints
 	r.HandleFunc("/forms/{id}/responses", srv.retrieveResponsesHandler).Methods(http.MethodGet)
 	r.HandleFunc("/forms/{id}/responses", srv.deleteHandler).Methods(http.MethodDelete)
+
+	// 'retrieve your own user API' endpoint
+	r.HandleFunc("/me", srv.retrieveSelfUserHandler).Methods(http.MethodGet)
 
 	srv.httpServer = httptest.NewServer(r)
 
@@ -103,6 +108,10 @@ func (s *typeformServer) retrieveHandler(w http.ResponseWriter, r *http.Request)
 
 func (s *typeformServer) retrieveFormattedImageHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, getResourceFixture(r, "retrieve"))
+}
+
+func (s *typeformServer) retrieveSelfUserHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "_fixtures/user.json")
 }
 
 func (s *typeformServer) updateHandler(w http.ResponseWriter, r *http.Request) {
