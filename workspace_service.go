@@ -36,9 +36,9 @@ func (s WorkspaceService) Delete(workspaceID string) error {
 	return s.resource.delete(resourceWorkspaces, workspaceID)
 }
 
-func (s WorkspaceService) List() (WorkspaceList, error) {
+func (s WorkspaceService) List(p WorkspaceListParams) (WorkspaceList, error) {
 	var l WorkspaceList
-	err := s.resource.list(resourceWorkspaces, nil, &l)
+	err := s.resource.list(resourceWorkspaces, p, &l)
 	if err != nil {
 		return WorkspaceList{}, err
 	}

@@ -47,7 +47,7 @@ func TestListWorkspaces(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
 		svc := typeform.NewWorkspaceService(newFakeServerClient(t))
 
-		list, err := svc.List()
+		list, err := svc.List(typeform.WorkspaceListParams{})
 		assert.Nil(t, err)
 
 		assert.Len(t, list.Items, 1)
