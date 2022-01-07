@@ -6,6 +6,8 @@ type Theme struct {
 	Visibility           string      `json:"visibility,omitempty"`
 	Background           *Background `json:"background,omitempty"`
 	Colors               *Colors     `json:"colors,omitempty"`
+	Fields               *Fields     `json:"fields,omitempty"`
+	Screens              *Screens    `json:"screens,omitempty"`
 	Font                 string      `json:"font,omitempty"`
 	HasTransparentButton bool        `json:"has_transparent_button,omitempty"`
 }
@@ -19,4 +21,14 @@ type Colors struct {
 	Background string `json:"background,omitempty"`
 	Button     string `json:"button,omitempty"`
 	Question   string `json:"question,omitempty"`
+}
+
+type Fields struct {
+	Alignment string `json:"alignment,omitempty"`
+	FontSize  string `json:"font_size,omitempty"`
+}
+
+type Screens struct {
+	Alignment string `json:"alignment,omitempty"`
+	FontSize  string `json:"font_size,omitempty"`
 }
